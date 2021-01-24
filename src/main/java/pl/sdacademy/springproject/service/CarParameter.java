@@ -10,8 +10,6 @@ import java.util.Set;
 @Getter
 @Builder
 @ToString
-//@Component //TODO zrobić z tego bean
-//TODO pozbyć się tego
 public class CarParameter {
     private final String producer;
     private final String model;

@@ -18,7 +18,7 @@ public interface CarRepository extends JpaRepository<CarEntity, Long> {
     public List<CarEntity> findByProducer(@Param("producer") String producer);
 
     @Query(value = "SELECT c FROM CarEntity c WHERE c.producer = :producer", nativeQuery = false)
-    public List<CarEntity> customQuery(@Param("producer") String producer);
+    public List<CarEntity> customQueryByProducer(@Param("producer") String producer);
 
 //    @Query(value = "SELECT c FROM Car c WHERE c.id = :id", nativeQuery = false)
 //    @Transactional(readOnly = true)

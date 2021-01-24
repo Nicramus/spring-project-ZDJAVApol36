@@ -8,4 +8,5 @@ import java.util.List;
 public interface CarService {
     //List<CarDto> getCars(CarParameter carParameter);
     List<CarEntity> getCarsAsEntity(CarParameter carParameter);
+    CarEntity createCar(CarParameter carParameter);
 }

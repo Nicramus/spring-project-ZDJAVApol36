@@ -1,9 +1,7 @@
 package pl.sdacademy.springproject.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import pl.sdacademy.springproject.entity.CarEntity;
 import pl.sdacademy.springproject.service.CarDto;
 import pl.sdacademy.springproject.service.CarParameter;
@@ -12,11 +10,10 @@ import pl.sdacademy.springproject.service.CarService;
 import java.util.List;
 
 @RestController
-//TODO main path
-public class CarRentRestController {
+public class CarController {
     private CarService carService;
 
-    public CarRentRestController(CarService carService) {
+    public CarController(CarService carService) {
         this.carService = carService;
     }
 
@@ -27,17 +24,23 @@ public class CarRentRestController {
 //    println("5 - zakończenie");
 
 
-    @GetMapping(value = "/getavailablecars")
+    @GetMapping(value = "/available-cars")
     //TODO paramsy
-    public List<CarEntity> getAllAvailableCarsByParameters() {
+    public ResponseEntity<List<CarEntity>> getAllAvailableCarsByParameters() {
         CarParameter carParameter = CarParameter.builder().build();
-        return this.carService.getCarsAsEntity(carParameter);
+        List<CarEntity> carsAsEntity = this.carService.getCarsAsEntity(carParameter);
+        return ResponseEntity.ok().body(carsAsEntity);
     }
 
-//    @PostMapping(value = "/createcar")
-//    public CarDto createCar() {
-//
-//    }
+    //TODO create car with requestID (aby pokazać request scope)
+    @PostMapping(value = "/create-car")
+    public ResponseEntity<CarEntity> createCar(@RequestParam(name = "producer") final String producer) {
+        CarParameter carParameter = CarParameter.builder().producer(producer).build();
+        CarEntity car = this.carService.createCar(carParameter);
+        return ResponseEntity.ok().body(car);
+    }
+
+
 
     @GetMapping
     public String welcomeInfo() {

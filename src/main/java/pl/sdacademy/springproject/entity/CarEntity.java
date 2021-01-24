@@ -3,6 +3,7 @@ package pl.sdacademy.springproject.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,6 +21,7 @@ public class CarEntity {
     private String colour;
     private BigDecimal price;
     private Byte automatic;
+    private String vin;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "Car_to_attribute",
